@@ -15,17 +15,24 @@ connectDB();
 connectToCloudinary();
 
 // Middlewares
-app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin (like curl or Postman)
-    if(!origin) return callback(null, true);
-    if(origin.endsWith('.vercel.app') || origin === 'http://localhost:5177'){
-      return callback(null, true);
-    }
-    callback(new Error('Not allowed by CORS'));
-  },
-  credentials: true
-}));
+const allowedOrigins = [
+  "https://nutricore-frontend.vercel.app", // deployed frontend
+  "http://localhost:5177",                 // local dev
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like curl/Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
 
 
 // API Endpoints

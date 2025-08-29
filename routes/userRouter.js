@@ -9,10 +9,10 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
-router.post("/admin", adminLogin);
-router.get("/profile", authMiddleware, getProfile);
-router.put("/update", authMiddleware, upload.single("profilePic"), updateProfile);
+router.post("/api/user/register", registerUser);
+router.post("/api/user/login", loginUser);
+router.post("/api/admin/login", adminLogin);
+router.get("/api/user/profile", authMiddleware, getProfile);
+router.put("/api/user/update", authMiddleware, upload.single("profilePic"), updateProfile);
 
 export default router;
