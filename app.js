@@ -16,15 +16,15 @@ connectToCloudinary();
 
 // Middlewares
 const allowedOrigins = [
-  "https://nutricore-frontend.vercel.app", // deployed frontend
-  "http://localhost:5177",                 // local dev
+  "https://nutricore-frontend.vercel.app",
+  "https://nutri-core-frontend-chax-93zxcn38f.vercel.app",
+  "http://localhost:5177",
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // allow requests with no origin (like curl/Postman)
-      if (!origin) return callback(null, true);
+      if (!origin) return callback(null, true); // allow Postman, curl
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
@@ -34,12 +34,15 @@ app.use(
   })
 );
 
+// Parse JSON requests
+app.use(express.json());
 
 // API Endpoints
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/label', labelRouter);
 
+// Root Endpoint
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
