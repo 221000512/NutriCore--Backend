@@ -1,3 +1,4 @@
+// app.js
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
@@ -11,28 +12,22 @@ import labelRouter from './routes/labelRouter.js';
 const app = express();
 const port = process.env.PORT || 10000;
 
+// Connect to DB and Cloudinary
 connectDB();
 connectToCloudinary();
 
-// Middlewares
-const allowedOrigins = [
-  "https://nutricore-frontend.vercel.app",
-  "https://nutri-core-frontend-chax-93zxcn38f.vercel.app",
-  "http://localhost:5177",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow Postman, curl
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-  })
-);
+// CORS Middleware
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow Postman/curl
+    if (origin.endsWith('.vercel.app') || origin === 'http://localhost:5177') {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 // Parse JSON requests
 app.use(express.json());
