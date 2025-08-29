@@ -15,14 +15,18 @@ connectDB();
 connectToCloudinary();
 
 // Middlewares
-app.use(express.json());
 app.use(cors({
-  origin: [
-    "http://localhost:5177",
-    "https://nutri-core-frontend-chax.vercel.app"
-  ],
+  origin: function(origin, callback){
+    // allow requests with no origin (like curl or Postman)
+    if(!origin) return callback(null, true);
+    if(origin.endsWith('.vercel.app') || origin === 'http://localhost:5177'){
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
+
 
 // API Endpoints
 app.use('/api/user', userRouter);
