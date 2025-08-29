@@ -9,7 +9,7 @@ import labelRouter from './routes/labelRouter.js';
 
 // App Config
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 10000;
 
 connectDB();
 connectToCloudinary();
