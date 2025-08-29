@@ -16,7 +16,13 @@ connectToCloudinary();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5177",
+    "https://nutri-core-frontend-chax.vercel.app"
+  ],
+  credentials: true
+}));
 
 // API Endpoints
 app.use('/api/user', userRouter);
