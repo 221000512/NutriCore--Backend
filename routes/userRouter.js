@@ -13,7 +13,4 @@ router.post("/login", loginUser);
 router.get("/profile", authMiddleware, getProfile); 
 router.put("/update", authMiddleware, upload.single("profilePic"), updateProfile); // /api/user/update
 
-// Admin login (optional if handled separately)
-router.post("/admin/login", adminLogin);        
-
 export default router;
