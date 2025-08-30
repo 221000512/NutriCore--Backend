@@ -8,12 +8,12 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // User routes
-router.post("/api/register", registerUser);
-router.post("/api/login", loginUser);
-router.get("/api/profile", authMiddleware, getProfile);
-router.put("/api/update", authMiddleware, upload.single("profilePic"), updateProfile);
+router.post("/register", registerUser);          
+router.post("/login", loginUser);                
+router.get("/profile", authMiddleware, getProfile); 
+router.put("/update", authMiddleware, upload.single("profilePic"), updateProfile); // /api/user/update
 
-// Admin login
-router.post("/admin/login", adminLogin);
+// Admin login (optional if handled separately)
+router.post("/admin/login", adminLogin);        
 
 export default router;
