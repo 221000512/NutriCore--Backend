@@ -8,7 +8,7 @@ import productRouter from './routes/productRouter.js';
 import labelRouter from './routes/labelRouter.js';
 import adminRoutes from './routes/admin.routes.js';
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 
 const app = express();
 

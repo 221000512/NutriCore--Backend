@@ -1,6 +1,5 @@
 import User from "../models/userModel.js";
 
-// Dummy ingredient analysis data
 const badIngredients = [
   "sugar",
   "high fructose corn syrup",
